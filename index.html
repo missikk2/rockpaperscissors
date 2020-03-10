@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissors Game</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <script>
+        function computerPlay() {
+            
+            let selection = ['Rock', 'Paper', 'Scissors'];
+            let min = Math.ceil(0);
+            let max = Math.floor(3);
+            let chooser = Math.floor(Math.random() * (max - min)) + min;
+
+            return selection[chooser];
+        }
+
+        function playRound(playerSelection, computerSelection) {
+
+            let player = playerSelection[0].toUpperCase() + playerSelection.slice(1).toLowerCase();
+            let comp = computerSelection[0].toUpperCase() + computerSelection.slice(1).toLowerCase();
+
+            switch (player) {
+                case 'Rock':
+                    if (comp == 'Rock') {
+                        return "It\'s a tie!";
+                    } else if (comp == 'Paper') {
+                        return "You lose! " + comp + " beats " + player + ".";
+                    } else {
+                        return "You win! " + player + " beats " + comp + ".";
+                    }
+                    break;
+                case 'Paper':
+                    if (comp == 'Paper') {
+                        return "It\'s a tie!";
+                    } else if (comp == 'Scissors') {
+                        return "You lose! " + comp + " beats " + player + ".";
+                    } else {
+                        return "You win! " + player + " beats " + comp + ".";
+                    }
+                    break;
+                case 'Scissors':
+                    if (comp == 'Scissors') {
+                        return "It\'s a tie!";
+                    } else if (comp == 'Rock') {
+                        return "You lose! " + comp + " beats " + player + ".";
+                    } else {
+                        return "You win! " + player + " beats " + comp + ".";
+                    }
+                    break;
+                default:
+                    return "Looks like you entered an invalid term. Try again!";
+            }
+        }
+
+        function game() {
+
+            let playerScore = 0;
+            let compScore = 0;
+
+            for (let count = 1; count <= 5; count++) {
+
+                let playerSelection = prompt('Round ' + count + ', let\'s play!', '');
+                let computerSelection = computerPlay();
+
+                console.log("Your choice: " + playerSelection);
+                console.log("Computer\'s choice: " + computerSelection);
+
+                results = playRound(playerSelection, computerSelection);
+                console.log(results);
+
+                if (results.search("lose") !== -1) {
+                    compScore++;
+                } else if (results.search("win") !== -1) {
+                    playerScore++;
+                }
+            }
+
+            console.log("Player score: " + playerScore);
+            console.log("Computer score: " + compScore);
+
+            if (playerScore > compScore) {
+                console.log("You win!");
+            } else if (playerScore < compScore) {
+                console.log("You lose! Better luck next time.");
+            }
+        }
+
+        game();
+    </script>
+</body>
+
+</html>
